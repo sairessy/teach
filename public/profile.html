@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach - dashboard</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="libraries/fontawesome/all.css"> -->
+    <style>
+        @font-face {
+            font-family: mserrat;
+            src: url(./assets/fonts/Montserrat-Bold.ttf);
+        }
+
+        @font-face {
+            font-family: rbt;
+            src: url(./assets/fonts/Roboto-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: mserrat-light;
+            src: url(./assets/fonts/Montserrat-Light.ttf);
+        }
+
+        @font-face {
+            font-family: ink;
+            src: url(./assets/fonts/Roboto-Light.ttf);
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        * {
+            font-family: ink;
+        }
+
+        i {
+            margin-right: 5px;
+        }
+
+        input, button, select {
+            outline: none;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], button, input[type='checkbox'] {
+            background-color: #617f9b;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            outline: none;
+            border: 2px solid #617f9b;
+            box-shadow: 0 0 4px 2px #eee;
+            cursor: pointer;
+        }
+
+        input[type="email"]:focus, 
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
+            border-color: #176fc2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #617f9b;
+        }
+
+        .btn-link {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #2bccb1;
+            color: #fff;
+        }
+
+        header {
+            background-color: #2bccb1;
+            /* background-color: #fff; */
+            box-shadow: 0 1px 1px 0 #eee;
+            box-shadow: 0 1px 1px 2px #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+            height: 50px; 
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        header #header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        header #header-right #goto-dashboard {
+            width: 35px;
+            height: 35px;
+            background-color: #176fc218;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            border-radius: 100%;
+        }
+
+        header #header-right #goto-dashboard i {
+            color: #617f9b;
+            margin: 0;
+        }
+
+        #badge {
+            background-color: #eee;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            display: none;
+        }
+
+        #badge i {
+            margin: 0;
+        }
+
+        #badge #num {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            color: #ff0000;
+        }
+
+        input, button {
+            border-radius: 0;
+            padding: 10px;
+        }
+
+        header #title a {
+            font-size: 22px;
+            color: #617f9b;
+            font-weight: bold;
+            font-family: rbt;
+        }
+
+        #btn-signout {
+            color: #617f9b;
+            padding: 10px 10px;
+            border-radius: 2px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+
+        #aside {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        #photo {
+            background-color: #eee;
+            left: 140px;
+            width: 140px;
+            height: 140px;
+            border-radius: 100%;
+            border: 4px solid #fff;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #form {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #grades-teaching {
+            display: flex;
+            background-color: #eee;
+            width: 100%;
+        }
+
+        #grades-teaching > div {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+        }
+
+        #form-disciplinas-container {
+            padding: 0 5px;
+        }
+
+
+        #disciplinas {
+            display: flex;
+            padding: 20px 0;
+            width: 400px;
+            flex-wrap: wrap;
+        }
+
+        #disciplina {
+            background-color: #eee;
+            border-radius: 25px;
+            padding: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        ul {
+            list-style: none;
+            
+        }
+
+        ul li {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        @media screen and (max-width: 900px) {
+
+            header {
+                background-color: #fff;
+                box-shadow: 0 1px 1px 2px #ccc;
+            }
+
+            #main-container {
+                flex-direction: column;
+            }
+            
+            #photo {
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            #form {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            #disciplinas {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="title"><a href="/">Teach</a></div>
+
+        <div id="header-right">
+            <!-- <a href="/dashboard" id="goto-dashboard"><i class='fa fa-user'></i></a> -->
+            <a href="/dashboard" id="goto-dashboard"><img id="profile-photo" src="assets/img/user.svg"/></a>
+        </div>
+    </header>
+    
+    <main>
+        <div id="main-container">
+            <div id="aside">
+                <!-- <div id="photo"></div> -->
+                <img src="assets/img/user.svg" id="photo">
+            </div>
+    
+            <div id="form">
+                <ul>
+                    <li id="name"></li>
+                    <li id="college"></li>
+                    <li id="field"></li>
+                    <li id="level"></li>
+                    <li id="zone"></li>
+                    <li id="contact"></li>
+                </ul>
+            </div>
+
+            <div id="form-disciplinas-container">
+                <h4 style="text-align: center;">Disciplinas leccionadas</h4>
+                <hr/>
+                <div id="disciplinas"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="js/config.js"></script>
+<script>
+    (async function(){
+        const auth = await fetch('/auth');
+        const isAuth = (await auth.json()).yeh;
+        if(isAuth) {
+            const fetchPhoto = await fetch('/userPhoto');
+            const photo = await fetchPhoto.json();
+            console.log(photo.url)
+            document.getElementById('profile-photo').src = photo.url;
+        }
+    })();
+   
+    
+    const url = new URL(window.location.href);
+    const user = url.searchParams.get('user');
+
+    
+    getUserDisciplinas();
+    getUserInfo();
+
+    async function getUserInfo() {
+        const url = '/publicUserInfo';
+        const responseUserInfo = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({user: user})
+        });
+        const json = await responseUserInfo.json();
+        console.log(json)
+
+        // Get field label
+        let field = '';
+        const f = config.fields.filter(e=> e.id == json.field);
+        field = f[0].label;
+
+        let college = 'College';
+        const c = config.colleges.filter(e=> e.id == json.college);
+        if(c.length > 0) {
+            college = c[0].label;
+        }
+
+        let zone = '';
+        let z = config.zones.filter(e => e.id == json.zone);
+        zone = z[0].label;
+
+        let level = 'Bacharel';
+        switch (json.level) {
+            case '0':
+                level = 'Bacharel';
+            break;
+            case '1':
+                level = 'Licenciado';
+            break;
+            case '2':
+                level = 'Mestrado';
+            break;
+            case '3':
+                level = 'Doutorado';
+            break;
+        }
+
+        document.getElementById('name').innerHTML = `
+            ${json.certified  ? "<i class='fa fa-check-circle' style='color: #2bccb1;'></i>" : ''} <b>${json.name}</b>
+        `;
+
+        if(json.photo != '' && json.photo != undefined) {
+            document.getElementById('photo').src = json.photo;
+        }
+
+        document.getElementById('field').innerText = field;
+        document.getElementById('level').innerText = level;
+        document.getElementById('zone').innerText = zone;
+        document.getElementById('contact').innerText = json.contact;
+        document.getElementById('college').innerText = college;
+    }
+
+     async function getUserDisciplinas() {
+        const url = '/publicDisciplinas/' + user;
+        const responseDisciplinas = await fetch(url);
+
+        const disciplinas = await responseDisciplinas.json();
+        let dss = '';
+        let ds = '';
+        disciplinas.forEach(dsp => {
+
+            const d = config.disciplinas.filter(e=> e.id == dsp.disciplina);
+            let ds = d[0].label;
+
+            dss += `
+                <div id="disciplina">${dsp.dominio + '% '} ${ds}</div>
+            `;
+        });
+
+        document.getElementById('disciplinas').innerHTML = dss;
+    }
+</script>
+</html>

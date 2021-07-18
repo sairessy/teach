@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+    <title>Teach - dashboard</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="libraries/fontawesome/all.css"> -->
+    <style>
+        @font-face {
+            font-family: mserrat;
+            src: url(./assets/fonts/Montserrat-Bold.ttf);
+        }
+
+        @font-face {
+            font-family: rbt;
+            src: url(./assets/fonts/Roboto-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: mserrat-light;
+            src: url(./assets/fonts/Montserrat-Light.ttf);
+        }
+
+        @font-face {
+            font-family: ink;
+            src: url(./assets/fonts/Roboto-Light.ttf);
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        * {
+            font-family: ink;
+        }
+
+        i {
+            margin-right: 5px;
+        }
+
+        input, button, select {
+            outline: none;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], button, input[type='checkbox'] {
+            background-color: #617f9b;
+            color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            outline: none;
+            border: 2px solid #617f9b;
+            box-shadow: 0 0 4px 2px #eee;
+            cursor: pointer;
+        }
+
+        input[type="email"]:focus, 
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
+            border-color: #176fc2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #617f9b;
+        }
+
+        .btn-link {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #2bccb1;
+            color: #fff;
+        }
+
+        header {
+            background-color: #2bccb1;
+            box-shadow: 0 1px 1px 0 #eee;
+            box-shadow: 0 1px 1px 2px #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+            height: 50px; 
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        header #header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        #badge {
+            background-color: #eee;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            display: none;
+        }
+
+        #badge i {
+            margin: 0;
+        }
+
+        #badge #num {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            color: #ff0000;
+        }
+
+        input, button {
+            border-radius: 0;
+            padding: 10px;
+        }
+
+        header #title a {
+            font-size: 22px;
+            color: #617f9b;
+            font-weight: bold;
+            font-family: rbt;
+        }
+
+        #btn-signout {
+            color: #617f9b;
+            padding: 10px 10px;
+            border-radius: 2px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+        }
+
+        #aside {
+            display: flex;
+            justify-content: center;
+        }
+
+
+        #photo {
+            background-color: #eee;
+            left: 140px;
+            width: 140px;
+            height: 140px;
+            border-radius: 100%;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #form {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #form input, #form select {
+            width: 100%;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+
+        #form select {
+            background-color: #eee;
+        }
+
+        #form button {
+            padding: 10px;
+            width: 100%;
+            border-radius: 2px;
+        }
+
+        input[type="submit"]:active, button:active {
+            opacity: 0.8;
+        }
+
+        .set-info {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        #form h4 {
+            font-weight: normal;
+            text-align: left;
+            width: 100%;
+        }
+
+        #grades-teaching {
+            display: flex;
+            background-color: #eee;
+            width: 100%;
+        }
+
+        #grades-teaching > div {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 10px;
+        }
+
+        #form-disciplinas-container {
+            padding: 0 5px;
+        }
+
+        #form-disciplinas {
+            display: flex;
+            height: fit-content;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #eee;
+            padding: 5px;
+            border-radius: 5px;
+            min-width: 90%;
+        }
+
+        #form-disciplinas button, #form-disciplinas select, #form-disciplinas input{
+            width: 100%;
+            border-radius: 2px;
+            box-sizing: border-box;
+        }
+
+        #disciplinas {
+            display: flex;
+            padding: 20px 0;
+            width: 400px;
+            flex-wrap: wrap;
+        }
+
+        #disciplina {
+            background-color: #eee;
+            border-radius: 25px;
+            padding: 5px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        #disciplina i {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        #disciplina i:active {
+            opacity: 0.6;
+        }
+
+        @media screen and (max-width: 900px) {
+            
+            header {
+                background-color: #fff;
+                box-shadow: 0 1px 1px 2px #ccc;
+            }
+
+            #main-container {
+                flex-direction: column;
+            }
+            
+            #photo {
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            #form {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10px;
+                margin-top: 20px;
+            }
+
+            #disciplinas {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            input, select {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="title"><a href="/"><script>document.write(config.appTitle)</script></a></div>
+
+        <div id="header-right">
+            <a href="#" id="badge"><i class="fa fa-bell"></i><b id="num">0</b></a>
+            <a href="/logout" id="btn-signout">Sair</a>
+        </div>
+    </header>
+    
+    <main>
+        <div id="main-container">
+            <div id="aside">
+                <!-- <div id="photo"></div> -->
+                <img id='photo' src="assets/img/user.svg">
+            </div>
+    
+            
+            <form id="form">
+                <div id="full-name" class="set-info">
+                    <input id="inp-full-name" type="text" placeholder="Nome completo">
+                </div>
+                <!-- <div id="full-name" class="set-info">
+                    <input id="inp-email" type="text" placeholder="Email">
+                </div> -->
+                <div id="full-name" class="set-info">
+                    <input id="inp-contact" type="text" placeholder="Contacto">
+                </div>
+                <div id="full-name" class="set-info">
+                    <select id="select-zone"></select>
+                </div>
+                <div id="full-name" class="set-info">
+                    <select id="select-field"></select>
+                </div>
+                <div id="full-name" class="set-info">
+                    <select id="select-level">
+                        <option value="0">Bacharel</option>
+                        <option value="1">Licenciado</option>
+                        <option value="2">Mestrado</option>
+                        <option value="3">Doutorado</option>
+                    </select>
+                </div>
+                <div id="full-name" class="set-info">
+                    <select id="select-college"></select>
+                </div>
+                <!-- <h4>Niveis que lecciona:</h4>
+                <div id="grades-teaching">
+                    <div>
+                        <input type="checkbox" id="0">
+                        <label for="0">Primário</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="1">
+                        <label for="1">Secundário</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="2">
+                        <label for="2">Superior</label>
+                    </div>
+                </div> -->
+                <button>Submeter</button>
+            </form>
+
+            <div id="form-disciplinas-container">
+                <form id="form-disciplinas">
+                    <select id="select-disciplina"></select>
+                    <input type="range" id="input-disciplina-dominio" value="70">
+                    <button>adicionar</button>
+                </form>
+
+                <div id="disciplinas"></div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<!-- <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+<script src="libraries/jquery-3.6.0.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCQvWggdA6y2DM9bXuL-LXe9io4cbmk2vY",
+        authDomain: "teach-d606c.firebaseapp.com",
+        projectId: "teach-d606c",
+        storageBucket: "teach-d606c.appspot.com",
+        messagingSenderId: "508231236004",
+        appId: "1:508231236004:web:15ba015b2c48570c1e6931"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    (async function() {
+        
+        const response = await fetch('/user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+        });
+
+        const json = await response.json();
+
+        document.getElementById('photo').src = json.photo;
+
+        document.getElementById('inp-full-name').value = json.name;
+        document.getElementById('inp-contact').value = json.contact;
+        document.getElementById('select-field').value = json.field;
+        document.getElementById('select-zone').value = json.zone;
+        document.getElementById('select-level').value = json.level;
+
+        // Put zones
+        let zones = '';
+        config.zones.forEach(zone=> {
+            zones += `
+                <option value="${zone.id}">${zone.label}</option>
+            `;
+        });
+
+        document.getElementById('select-zone').innerHTML = zones;
+
+        // Put disciplinas
+        let disciplinas = '';
+        config.disciplinas.forEach(disciplina=> {
+            disciplinas += `
+                <option value="${disciplina.id}">${disciplina.label}</option>
+            `;
+        });
+
+        document.getElementById('select-disciplina').innerHTML = disciplinas;
+
+        // Put fields
+        let fields = '';
+        config.fields.forEach(field=> {
+            fields += `
+                <option value="${field.id}">${field.label}</option>
+            `;
+        });
+
+        document.getElementById('select-field').innerHTML = fields;
+
+        // Put colleges
+        let colleges = '';
+        config.colleges.forEach(college=> {
+            colleges += `
+                <option value="${college.id}">${college.label}</option>
+            `;
+        });
+
+        document.getElementById('select-college').innerHTML = colleges;
+    })();
+    
+
+    let levels = [{id: 0, checked: false}, {id: 1, checked: true}, {id: 2, checked: false}];
+
+    document.getElementById('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('inp-full-name').value;
+        // const email = document.getElementById('inp-email').value;
+        const contact = document.getElementById('inp-contact').value;
+        const field = document.getElementById('select-field').value;
+        const college = document.getElementById('select-college').value;
+        const zone = document.getElementById('select-zone').value;
+        const level = document.getElementById('select-level').value;
+
+        const data = {name, contact, field, zone, level, college, certified: true, levels};
+
+        updateUserInfo(data);
+        alert('Actualizado com sucesso!');
+    });
+
+    async function updateUserInfo(data) {
+        const response = await fetch('/updateUserInfo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+    }
+
+    // Listen for level changes
+    document.querySelectorAll("#grades-teaching input[type='checkbox']").forEach(box=> {
+        box.addEventListener('change', (evt) => {
+            const data = {
+                id: parseInt(evt.target.id),
+                checked: evt.target.checked
+            }
+
+            levels.forEach(level => {
+                if(level.id == data.id && level.id != 1) {
+                    levels[level.id] = data;
+                }
+            });
+        });
+    });
+
+    // Get user disciplinas
+    getUserDisciplinas();
+
+    
+    // Remove disciplinas
+    $(document).on('click', '#disciplina i', async (e)=> {
+        const itemId = e.target.id;
+        console.log(itemId);
+
+        const response = await fetch('/removeDisciplina', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({itemId})
+        });
+
+        getUserDisciplinas();
+    });
+
+    // Add disciplinas
+    document.getElementById('form-disciplinas').addEventListener('submit', async (evt)=> {
+        evt.preventDefault();
+        
+        const disciplina = document.getElementById('select-disciplina').value;
+        const dominio = document.getElementById('input-disciplina-dominio').value;
+
+        const response = await fetch('/updateDisciplinas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({disciplina, dominio})
+        });
+
+        getUserDisciplinas();
+
+    });
+
+        
+    async function getUserDisciplinas() {
+        const responseDisciplinas = await fetch('/disciplinas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        });
+
+        const disciplinas = await responseDisciplinas.json();
+        let dss = '';
+        let ds = '';
+
+        
+        
+
+        disciplinas.forEach(dsp => {
+            const d = config.disciplinas.filter(e=> e.id == dsp.disciplina);
+            let disciplina = '';
+            disciplina = d.length > 0 ? d[0].label : 'N/A';
+
+            dss += `
+                <div id="disciplina">${dsp.dominio + '% '} ${disciplina}<i class="fa fa-times" id="${dsp.disciplina}"></i></div>
+            `;
+        });
+
+        document.getElementById('disciplinas').innerHTML = dss;
+
+        // Upload profile pic
+        document.getElementById('photo').addEventListener('click', ()=> {
+            let files = [];
+            let reader; 
+            
+            let input = document.createElement('input');
+            input.type = 'file';
+            
+            
+            input.onchange = e => {
+                files = e.target.files;
+                reader = new FileReader();
+                reader.onload =  async () => {
+                document.getElementById('photo').src = reader.result;
+                const ext = files[0].type.split('/')[1];
+                const userId = await getUserId();
+                const fileName = new Date().getTime() + '-' + userId + '.' + ext;
+                var uploadTask = firebase.storage().ref('photos/' + fileName).put(files[0]);
+                uploadTask.on('state_changed', function(snapshot) {
+
+                },
+
+                function(err) {
+
+                }, 
+
+                function() {
+                    uploadTask.snapshot.ref.getDownloadURL().then(async function(url) {
+                        let photoUrl = await url;
+                        const data = {url: photoUrl};
+                        console.log(data);
+                        const response = await fetch('/updatePhotoUrl', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                            body: JSON.stringify(data)
+                        });
+                    });
+                });
+            }
+                reader.readAsDataURL(files[0]);
+            }
+
+            input.click();
+
+        });
+
+        async function getUserId() {
+            const response = await fetch('/userId');
+            const id = (await response.json()).id;
+            return id;
+        }
+
+        async function savePhotoToNEDB(url) {
+            console.log(url);
+            return;
+            const response = await fetch('/updatePhotoUrl', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+                body: JSON.stringify({url})
+            });
+        }
+    }
+</script>
+</html>

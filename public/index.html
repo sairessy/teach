@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+    <title>Teach - Encontre explicadores</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="libraries/fontawesome/all.css"> -->
+    <style>
+        @font-face {
+            font-family: mserrat;
+            src: url(./assets/fonts/Montserrat-Bold.ttf);
+        }
+
+        @font-face {
+            font-family: rbt;
+            src: url(./assets/fonts/Roboto-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: mserrat-light;
+            src: url(./assets/fonts/Montserrat-Light.ttf);
+        }
+
+        @font-face {
+            font-family: ink;
+            src: url(./assets/fonts/Roboto-Light.ttf);
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #eee;
+            background-color: #f1f1f1;
+        }
+
+        * {
+            font-family: ink;
+        }
+
+        i {
+            margin-right: 5px;
+        }
+
+        input, button {
+            outline: none;
+            border: 1px solid #ddd;
+            border-radius: 2px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], button {
+            color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        select {
+            padding: 10px;
+            margin: 10px 0;
+            outline: none;
+            border: none;
+            border-left: 1px solid #ccc;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #176fc2;
+        }
+
+        .btn-link {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #2bccb1;
+            color: #fff;
+        }
+
+        header {
+            background-color: #2bccb1;
+            /* background-color: #fff; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+            height: 50px;
+            box-shadow: 0 1px 1px 0 #eee;
+            box-shadow: 0 1px 1px 2px #ccc;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        header form {
+            display: flex;
+            align-items: center;
+        }
+
+        header input {
+            background: url(assets/img/search-solid.svg) no-repeat 10px center/20px;
+            background-color: #eee;
+            border: none;
+            padding: 10px;
+            padding-left: 35px;
+            width: 500px;
+            color: #888;
+            font-size: 14px;
+            border-radius: 3px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        header input:focus {
+            background-color: #f8f8f8;
+        }
+
+        header #title {
+            display: flex;
+            align-items: center;
+        }
+
+        header #title i {
+            margin: 0 10px;
+            font-size: 24px;
+            display: none;
+        }
+
+        header #title i:active {
+            opacity: .4;
+        }
+
+        header #title a {
+            font-size: 22px;
+            color: #617f9b;
+            font-weight: bold;
+            font-family: rbt;
+        }
+
+        header #header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        header #header-right #goto-dashboard {
+            width: 35px;
+            height: 35px;
+            /* background: url(assets/img/user.png) no-repeat center center/cover; */
+            background-color: #176fc218;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #eee;
+            border-radius: 100%;
+        }
+
+        header #header-right #goto-dashboard i {
+            color: #617f9b;
+            margin: 0;
+        }
+
+        #btn-login {
+            background-color: #176fc218;
+            color: #617f9b;
+            padding: 10px 10px;
+            border-radius: 2px;
+            display: none;
+        }
+
+        #badge {
+            background-color: #eee;
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            display: none;
+        }
+
+        #badge i {
+            margin: 0;
+        }
+
+        #badge #num {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            color: #ff0000;
+        }
+
+        #main-container {
+            display: flex;
+        }
+
+        #banner {
+            height: 200px;
+            background-color: #ddd;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        aside {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+
+        #container-ourcontact-ceo {
+            position: sticky;
+            top: 60px;
+            width: 100%;
+        }
+
+        #our-contact {
+            background-color: #fff;
+            box-shadow: 0 0 1px 1px #eee;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 300px;
+            padding-bottom: 10px;
+        }
+
+        #our-contact .btn-social {
+            display: inline-flex;
+            width: 25px;
+            height: 25px;
+            justify-content: center;
+            align-items: center;
+            border: none;
+        }
+
+        #our-contact i {
+            margin: 0;
+        }
+
+        #container-users {
+            flex: 3;
+            padding: 10px;
+            position: relative;
+        }
+
+        main #users {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .user {
+            position: relative;
+            height: 320px;
+            display: none;
+            background-color: #fff;
+            font-family: mserrat-light;
+            color: #555;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 2px 2px #eee;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .user .user-top {
+            flex: 2;
+            border-bottom: 1px solid #617f9b; 
+            background-color: #fafafa;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .user .user-bottom {
+            flex: 3;
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        .user .user-footer {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+
+        .user .user-footer a {
+            color: #176fc2;
+        }
+
+        .user .photo {
+            width: 80px;
+            height: 80px;
+            left: 0;
+            right: 0;
+            margin: 40px auto 0 auto;
+            border-radius: 100%;
+            border: 2px solid #fff;
+            background: url(assets/img/user.svg) no-repeat center center/cover;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+
+        .user .college {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 25px;
+            height: 25px;
+            background-color: #ddd;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 100%;
+        }
+
+        .btn-social {
+            background-color: #176fc218;
+            padding: 5px;
+            border-radius: 25px;
+            border: 1px solid #617f9b;
+        }
+
+        button {
+            background-color: #617f9b;
+            border-radius: 2px;
+            padding: 15px;
+            width: 200px;
+            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            background-color: #617f9b;
+        }
+
+        button:active {
+            opacity: 0.8;
+        }
+
+        button#btn-search {
+            width: auto;
+            padding: 10px;
+            border-radius: 3px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: #617f9b;
+        }
+
+        #btn-more-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            display: none;
+        }
+
+        button#btn-more {
+            border-radius: 1px;
+        }
+
+        #ceo {
+            display: flex;
+            align-items: center;
+            background-color: #fcfcfc;
+            border-top: 1px solid #eee;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        #ceo #ceo-photo {
+            width: 50px;
+            height: 50px;
+            display: none;
+            border-radius: 100%;
+            background-color: #ddd;
+            margin-right: 10px;
+        }
+
+        #ceo #ceo-description h4 {
+            font-family: rbt;
+            color: #ccc;
+            font-weight: 100;
+        }
+
+        @media screen and (max-width: 1020px) {
+            body {
+                background-color: #ddd;
+            }
+
+            header {
+                background-color: #fff;
+                box-shadow: 0 1px 1px 2px #ccc;
+            }
+   
+            header #title i {
+                margin-right: 10px;
+                display: inline-block;
+            }
+
+            .btn-social {
+                padding: 15px;
+            }
+
+            header form {
+                display: none;
+            }
+
+            header input {
+                display: none;
+            }
+
+            #main-container {
+                flex-direction: column;
+            }
+
+            .user {
+                border-bottom: 1px solid #ccc;
+                border: 1px solid #ccc;
+                box-shadow: 0 1px 1px 1px #ccc;
+            }
+
+            button#btn-more {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="title">
+            <i class="fa fa-bars"></i>
+            <a href="/"><script>document.write(config.appTitle)</script></a>
+        </div>
+        <form id="form-search">
+            <input type="search" id="inp-search" placeholder="Procurar explicador">
+            <select id="select-field">
+                <option value="">Curso</option>
+                <option value="0">Matemática Básica</option>
+                <option value="1">Análise Matemática</option>
+                <option value="2">Matemática Discreta</option>
+                <option value="3">ALGA</option>
+                <option value="4">Dinámica de sólidos</option>
+            </select>
+
+            <select id="select-zone">
+                <option value="">Bairro</option>
+                <option value="0">Matola</option>
+                <option value="1">Mavalane</option>
+                <option value="2">Mafalala</option>
+            </select>
+            <button id="btn-search">Pesquisar</button>
+        </form>
+        <div id="header-right">
+            <a href="#" id="badge"><i class="fa fa-bell"></i><b id="num">0</b></a>
+            <a href="/login" id="btn-login">Entrar</a>
+            <a href="/dashboard" id="goto-dashboard"><img id="profile-photo" src="assets/img/user.svg"/></a>
+        </div>
+    </header>
+    <main>
+        <div id="main-container">
+            <div id="container-users">
+                <div id="banner"></div>
+                <div id="users"></div>
+                <div id="btn-more-container">
+                    <button id="btn-more"><i class="fa fa-chevron-down"></i>Mostrar mais</button>
+                </div>
+            </div>
+
+            <aside>
+                <div id="container-ourcontact-ceo">
+                    <div id="our-contact">
+                        <img src="assets/img/undraw_exams_g4ow.svg" width="200px" height="200px" alt="">
+                        <h3>Fale connosco</h3>
+                        <div>
+                            <a href='#' class='btn-social'><i class='fas fa-at'></i></a>
+                            <a href='#' class='btn-social'><i class='fab fa-whatsapp'></i></a>
+                            <a href='#' class='btn-social'><i class='fab fa-facebook'></i></a>
+                        </div>
+                    </div>
+    
+                    <div id="ceo">
+                        <div id="ceo-photo"></div>
+                        <div id="ceo-description">
+                            <h4>
+                                <!-- Sairesse Victorino - Developer -->
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+
+<script>
+    (async ()=> {
+        // Check auth to get photo
+        const auth = await fetch('/auth');
+        const isAuth = (await auth.json()).yeh;
+        if(isAuth) {
+            const fetchPhoto = await fetch('/userPhoto');
+            const photo = await fetchPhoto.json();
+            console.log(photo.url)
+            document.getElementById('profile-photo').src = photo.url;
+        }
+
+        const response = await fetch('/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        });
+        const json = await response.json();
+
+        const users = document.getElementById('users'); 
+
+        const teachs = json;
+
+        let profiles = '';
+        for (let i = 0; i < teachs.length; i++) {
+            const user = teachs[i];
+
+            let levels = '|';
+
+            // Get level label
+            user.levels.forEach(level=> {
+                if(level.checked) {
+                    switch (level.id) {
+                        case   0:
+                            levels += 'Primário |';
+                        break;
+                        case   1:
+                            levels += 'Secundário |';
+                        break;
+                        case   2:
+                            levels += 'Superior |';
+                        break;
+                    }
+                }
+               
+            });
+
+            // Put zones
+            let zones = '';
+            config.zones.forEach(zone=> {
+                zones += `
+                    <option value="${zone.id}">${zone.label}</option>
+                `;
+            });
+
+            document.getElementById('select-zone').innerHTML = zones;
+
+            // Put fields
+            let fields = '';
+            config.fields.forEach(field=> {
+                fields += `
+                    <option value="${field.id}">${field.label}</option>
+                `;
+            });
+
+            document.getElementById('select-field').innerHTML = fields;
+
+            // Get field label
+            const f = config.fields.filter(e=> e.id == user.field);
+            const field = f[0].label;
+
+            // Get zone label
+            const z = config.zones.filter(e=> e.id == user.zone);
+            const zone = z[0].label;
+            // colleges
+            const c = config.colleges.filter(e=> e.id == user.college);
+            let college = '';
+            let collegeLogoElement = '';
+            if(c.length > 0) {
+                college = c[0].label;
+                const collegeLogo = c[0].photo;
+                collegeLogoElement = `<div class='college' style='background-image: url(./assets/img/colleges-logos/${collegeLogo});'></div>`;
+            }
+
+            const photoUrl = (user.photo == '' || user.photo == undefined) ? 'assets/img/user.svg' : user.photo;
+            const photoElement = `<div class='photo' style='background-image: url(${photoUrl})'></div>`;
+            
+            profiles += `
+            <div class='user'>
+                <div class='user-top'>
+                    ${college !=  '' ? collegeLogoElement : ''}
+                    ${photoElement}
+                </div>
+                <div class='user-bottom'>
+                    <div>${user.certified  ? "<i class='fa fa-check-circle' style='color: #2bccb1;'></i>" : ''} <b>${user.name}</b></div>
+                    <div>${field}</div>
+                    <div>${zone}</div>
+                    <div><a href='/profile.html?user=${user.id}'>Perfil</a></div>
+                </div>
+                <div class='user-footer'>
+                    <div>
+                        <a target='_blank' href='https://wa.me/${user.contact}' class='btn-social'><i class='fab fa-whatsapp'></i>Whatsapp</a>
+                    </div>
+                </div>
+            </div>`;
+        }
+        
+        users.innerHTML = profiles;      
+        
+        // Listen for search
+        document.getElementById('form-search').addEventListener('submit', async (evt) => {
+            evt.preventDefault();
+            const text = document.getElementById('inp-search').value;
+            const field = document.getElementById('select-field').value;
+            const zone = document.getElementById('select-zone').value;
+
+            const r = await fetch('/searchUsers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+                body: JSON.stringify({text, field, zone})
+            });
+
+            const json = await r.json();
+            console.log(json);
+
+        });
+    })();
+</script>
+</html>

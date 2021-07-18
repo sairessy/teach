@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/config.js"></script>
+    <title>Teach - iniciar sessão ou registar</title>
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #eee;
+        }
+
+        * {
+            font-family: ink;
+        }
+
+        i {
+            margin-right: 5px;
+        }
+
+        @font-face {
+            font-family: mserrat;
+            src: url(./assets/fonts/Montserrat-Bold.ttf);
+        }
+
+        @font-face {
+            font-family: rbt;
+            src: url(./assets/fonts/Roboto-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: ink;
+            src: url(./assets/fonts/Roboto-Light.ttf);
+        }
+
+        input {
+            outline: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input[type="submit"], button {
+            background-color: #617f9b;;
+            color: #fff;
+            box-shadow: 0 0 4px 2px #eee;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:active {
+            opacity: 0.9;
+        }
+
+        input[type="email"]:focus, 
+        input[type="text"]:focus, 
+        input[type="password"]:focus {
+            border-color: #617f9b;
+        }
+
+        a {
+            text-decoration: none;
+            color: #617f9b;
+        }
+
+        .btn-link {
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #2bccb1;
+            color: #fff;
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-around;
+            height: 100vh;
+            align-items: center;
+        }
+
+        #container #aside {
+            width: 400px;
+            height: 200px;
+            /* background: url(assets/img/undraw_exams_g4ow.svg) no-repeat center center/contain; */
+        }
+
+        #container #aside #title a {
+            color: #617f9b;
+            font-family: rbt;
+        }
+
+        #container #aside h2 {
+            font-family: ink;
+            color: #000;
+            font-weight: normal;
+        }
+
+        #container #form form {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 0 4px 4px #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        #container #form form a {
+            display: block;
+            margin: auto;
+        }
+
+        #container #form form input {
+            padding: 15px;
+            width: 340px;
+            margin: 5px;
+            box-sizing: border-box;
+        }
+
+        #form h1 {
+            display: none;
+        }
+
+        @media screen and (max-width: 1024px){
+            body {
+                background-color: #fff;
+            }
+
+            #form h1 {
+                display: block;
+                text-align: center;
+            }
+
+            #form h1 a {
+                font-family: rbt;
+            }
+
+            #container #aside {
+                display: none;
+            }
+
+            #container #form form {
+                padding: 0;
+                box-shadow: none;
+            }
+
+            #container #form form input {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="aside">
+            <h1 id="title"><a href="/"><script>document.write(config.appTitle)</script></a></h1>
+            <h2>O <script>document.write(config.appTitle)</script> ajuda-te a encontrar explicadores, para te ajudar com as suas dificuldades académicas!</h2>
+        </div>
+    
+        <div id="form">
+            <h1><a href="/">Teach</a></h1>
+            <form id="form-login">
+                <input type="email" id="email" placeholder="Email" autofocus>
+                <input type="password" id="pass" placeholder="Palavra passe">
+                <input type="submit" value="Iniciar sessão">
+                <a href="#">Não sabes a tua palavra passe?</a>
+                <hr/>
+                <a href="/signup" class="btn-link">Criar nova conta</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (async ()=> {
+            document.getElementById('form-login').addEventListener('submit', (evt)=> {
+                evt.preventDefault();
+                const email = document.getElementById('email').value;
+                const pass = document.getElementById('pass').value;
+                const user = {email, pass};
+                login(user);
+            });
+
+            async function login(user) {
+                const response = await fetch('/trylogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user)
+                });
+                const json = await response.json();
+                console.log(json.sucess);
+                
+                if(json.sucess) {
+                    window.location.href = '/dashboard';
+                } else {
+                    alert('Usuário ou senha inválidos!');
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

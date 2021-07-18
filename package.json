@@ -1,0 +1,16 @@
+{
+  "name": "Teach",
+  "version": "1.0.0",
+  "description": "An aplication to find a teacher",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "author": "Victorino, Sairesse <sairessy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
+  }
+}

@@ -1,6 +1,5 @@
 const config = {
     appTitle: 'Teach',
-    roads: ['Mafalala', 'Urbanização', 'Alto Maé'],
     fields: [
         {id: 0, label: 'Matemática'},
         {id: 1, label: 'Fisica'},
@@ -8,7 +7,11 @@ const config = {
         {id: 3, label: 'Informática'},
         {id: 4, label: 'Estatistica'},
         {id: 5, label: 'Engenharia Civil'},
-        {id: 6, label: 'Direito'}
+        {id: 6, label: 'Direito'},
+        {id: 7, label: 'Engenharia Mecânica'},
+        {id: 8, label: 'Engenharia Química'},
+        {id: 9, label: 'Economia'},
+        {id: 10, label: 'Administração e Finanças'}
     ],
     zones: [
         {id: 0, label: 'Matola' },
@@ -37,7 +40,9 @@ const config = {
         {id: 1, label: 'Matemática Discreta'},
         {id: 2, label: 'Base de Dados'},
         {id: 3, label: 'ALGA'},
-        {id: 4, label: 'Programação Oriendada a Objectos'}
+        {id: 4, label: 'Programação Oriendada a Objectos'},
+        {id: 5, label: 'Estatística Básica'},
+        {id: 6, label: 'Matemática Básica (I, II)'}
     ],
     colleges: [
         {id: 0, label: 'Universidade Eduardo Mondlhane', photo: 'uem.jpg'},
